@@ -18,12 +18,29 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CategoryController extends AbstractController
 {
+
+
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+    /**
+     * @var CategoryRepository
+     */
+    private $repository;
+
+    public function __construct(CategoryRepository $categoryRepository, EntityManagerInterface $em)
+    {
+        $this->repository = $categoryRepository;
+        $this->em = $em;
+    }
+
     /**
      * @Route("/", name="category.index")
      */
-    public function index(CategoryRepository $categoryRepository)
+    public function index()
     {
-        $categories = $categoryRepository->findAll();
+        $categories = $this->repository->findAll();
 
         return $this->render('category/index.html.twig', [
             'categories' => $categories
@@ -31,17 +48,17 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/add", name="category.add")
+     * @Route("/add", name="category.add", methods={"POST"})
      */
-    public function add(Request $request, EntityManagerInterface $em)
+    public function add(Request $request)
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($category);
-            $em->flush();
+            $this->em->persist($category);
+            $this->em->flush();
             $this->addFlash('success', 'La catégorie a bien été créée');
             return $this->redirectToRoute('category.index');
         }
@@ -49,6 +66,37 @@ class CategoryController extends AbstractController
         return $this->render('category/add.html.twig', [
             'form' => $form->createView()
         ]);
+    }
 
+    /**
+     * @Route("/{id}/edit", name="category.edit", methods={"GET|POST"})
+     */
+    public function edit(Category $category, Request $request)
+    {
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->flush();
+            $this->addFlash('success', 'La catégorie a bien été modifiée');
+            return $this->redirectToRoute('category.index');
+        }
+        return $this->render('category/edit.html.twig', [
+            'category' => $category,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="category.delete", methods={"DELETE"})
+     */
+    public function delete(Category $category, Request $request)
+    {
+        if($this->isCsrfTokenValid('delete'.$category->getId(), $request->get('_token'))) {
+            $this->em->remove($category);
+            $this->em->flush();
+            $this->addFlash('success', 'Catégorie supprimée avec succes');
+        }
+        return $this->redirectToRoute('category.index');
     }
 }
