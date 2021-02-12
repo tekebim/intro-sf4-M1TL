@@ -41,6 +41,45 @@ class User implements UserInterface
      */
     private $isVerified = false;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $country;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_available;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $company;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $age;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $website_url;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    public function __construct(){
+        $this->createdAt = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -130,6 +169,90 @@ class User implements UserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getIsAvailable(): ?bool
+    {
+        return $this->is_available;
+    }
+
+    public function setIsAvailable(bool $is_available): self
+    {
+        $this->is_available = $is_available;
+
+        return $this;
+    }
+
+    public function getCompany(): ?string
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?string $company): self
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getAge(): ?int
+    {
+        return $this->age;
+    }
+
+    public function setAge(?int $age): self
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
+    public function getWebsiteUrl(): ?string
+    {
+        return $this->website_url;
+    }
+
+    public function setWebsiteUrl(?string $website_url): self
+    {
+        $this->website_url = $website_url;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

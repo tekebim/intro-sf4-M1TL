@@ -1,0 +1,42 @@
+{{ form_start(registrationForm) }}
+<div class="row">
+    <div class="col-md-6 mb-3">
+        {{ form_row(registrationForm.email) }}
+    </div>
+    <div class="col-md-6 mb-3">
+        {{ form_row(registrationForm.plainPassword) }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        {{ form_row(registrationForm.website_url) }}
+    </div>
+    <div class="col-md-6 mb-3">
+        {{ form_row(registrationForm.age) }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-3">
+        {{ form_row(registrationForm.country) }}
+    </div>
+    <div class="col-md-4 mb-3">
+        {{ form_row(registrationForm.city) }}
+    </div>
+    <div class="col-md-4 mb-3">
+        {{ form_row(registrationForm.company) }}
+    </div>
+</div>
+<div class="row">
+    <div class="mb-3">
+        {{ form_row(registrationForm.is_available) }}
+        {{ form_row(registrationForm.agreeTerms) }}
+    </div>
+</div>
+<div class="mb-3 row text-center">
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">S'enregister</button>
+    </div>
+</div>
+{{ form_end(registrationForm) }}
