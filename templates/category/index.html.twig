@@ -10,6 +10,8 @@
     <div class="container">
         <h1>Catégories</h1>
 
+        <a class="btn btn-primary" href="{{ path('category.add') }}">Ajouter</a>
+
         <table class="table">
             <thead>
             <tr>
@@ -24,13 +26,14 @@
                     <td>{{ category.id }}</td>
                     <td>{{ category.name }}</td>
                     <td>
-                        <form method="post" action="{{ path('category.delete', {id:category.id}) }}" onsubmit="confirm('Etes-vous sûr ? Cette action est irréversible')">
+                        <a href="{{ path('category.edit', {id:category.id}) }}" class="btn btn-primary">Editer</a>
+                        <form method="post" action="{{ path('category.delete', {id:category.id}) }}"
+                              onsubmit="confirm('Etes-vous sûr ? Cette action est irréversible')">
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete'~category.id) }}">
                             <button type="submit" class="btn btn-danger">Supprimer</button>
                         </form>
                     </td>
-                    <td><a href="{{ path('category.edit', {id:category.id}) }}">Editer</a></td>
                 </tr>
             {% endfor %}
             </tbody>

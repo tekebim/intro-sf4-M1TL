@@ -48,7 +48,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/add", name="category.add", methods={"POST"})
+     * @Route("/add", name="category.add", methods={"GET", "POST"})
      */
     public function add(Request $request)
     {

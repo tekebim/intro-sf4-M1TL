@@ -3,12 +3,8 @@
 {% block title %}Ajouter une catégorie{% endblock %}
 
 {% block body %}
-
     <div class="container">
-        {{ form_start(form) }}
-        {{ form_row(form.name) }}
-        <button type="submit" class="btn btn-primary">Ajouter</button>
-        {{ form_end(form) }}
+        {{ include('category/_form.html.twig', {form: form}) }}
     </div>
 {% endblock %}
 
