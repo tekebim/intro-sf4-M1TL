@@ -25,12 +25,17 @@ class RoomType extends AbstractType
             ])
             ->add('capacity', IntegerType::class)
             ->add('floor', IntegerType::class)
-            ->add('hasInternet', CheckboxType::class)
-            ->add('hasProjector', CheckboxType::class)
+            ->add('hasInternet', CheckboxType::class, [
+                'required' => false
+            ])
+            ->add('hasProjector', CheckboxType::class, [
+                'required' => false
+            ])
             ->add('address', TextType::class)
             ->add('city', TextType::class)
-            ->add('isAvailable', CheckboxType::class)
-        ;
+            ->add('isAvailable', CheckboxType::class, [
+                'required' => false
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
