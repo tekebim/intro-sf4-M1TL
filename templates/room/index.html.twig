@@ -36,7 +36,7 @@
                     <td>{{ room.city }}</td>
                     <td>{{ room.floor }}</td>
                     <td>{{ room.hasInternet == 1 ? 'yes' : 'no' }}</td>
-                    <td>{{ room.user.firstname }} {{ room.user.lastname }}</td>
+                    <td><a href={{ path('room.byUser', {'id': room.user.id}) }}>{{ room.user.firstname }} {{ room.user.lastname }}</a></td>
                     <td>
                         <a href="{{ path('room_show', {'id': room.id}) }}">show</a>
                         <a href="{{ path('room_edit', {'id': room.id}) }}">edit</a>

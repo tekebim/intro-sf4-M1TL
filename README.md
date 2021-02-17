@@ -7,3 +7,10 @@
 - Modifier le contenu du template des Rooms pour améliorer son affichage et rajouter les éléments.
 
 - Créer une requête qui permettra d’afficher les salles selon une ville donnée via une valeur défini dans la route.
+
+
+
+# Routes path
+
+Route to filter rooms by user :
+```https://127.0.0.1:8000/room/byUser/6```

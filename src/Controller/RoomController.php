@@ -108,7 +108,7 @@ class RoomController extends AbstractController
     }
 
     /**
-     * @Route("/user/{id}/showRooms", name="user.showRooms")
+     * @Route("/byUser/{id}", name="room.byUser")
      */
     public function showRoomsByUser(RoomRepository $roomRepository, User $user):Response
     {
