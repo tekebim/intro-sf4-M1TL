@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Category;
+use App\Entity\User;
 use App\Entity\Room;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -66,7 +67,6 @@ class RoomRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-
     public function getSearchQuery(Category $category)
     {
         $query = $this->createQueryBuilder('r')
@@ -74,5 +74,14 @@ class RoomRepository extends ServiceEntityRepository
             ->setParameter('id', $category->getId());
 
         return $query;
+    }
+
+    public function findRoomByUser(User $user): array
+    {
+        $query = $this->createQueryBuilder('r')
+            ->where('r.user = :id')
+            ->setParameter('id', $user->getId());
+
+        return $query->getQuery()->getResult();
     }
 }

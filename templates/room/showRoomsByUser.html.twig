@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rooms created by user{% endblock %}
+{% block body %}
+    <div class="container">
+        <h1>Rooms created by : {{ user.lastname }} - {{ user.firstname }}</h1>
+        <ul>
+            {% for room in rooms %}
+                <li>{{ room.id }} - {{ room.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+
+
+

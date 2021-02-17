@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Room;
+use App\Entity\User;
 use App\Form\RoomType;
 use App\Repository\RoomRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -102,6 +103,19 @@ class RoomController extends AbstractController
 
         return $this->render('room/showCategory.html.twig', [
             'category' => $category,
+            'rooms' => $rooms
+        ]);
+    }
+
+    /**
+     * @Route("/user/{id}/showRooms", name="user.showRooms")
+     */
+    public function showRoomsByUser(RoomRepository $roomRepository, User $user):Response
+    {
+        $rooms = $roomRepository->findRoomByUser($user);
+
+        return $this->render('room/showRoomsByUser.html.twig', [
+            'user' => $user,
             'rooms' => $rooms
         ]);
     }
