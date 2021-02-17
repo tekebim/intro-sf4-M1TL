@@ -11,12 +11,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @Route("/room")
  */
 class RoomController extends AbstractController
 {
+
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     /**
      * @Route("/", name="room_index", methods={"GET"})
      */
@@ -34,7 +43,8 @@ class RoomController extends AbstractController
     {
         $room = new Room();
         $form = $this->createForm(RoomType::class, $room);
-        $room->setUser($this->getUser());
+        $room->setUser($this->security->getUser());
+        // $room->setUser($this->getUser());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -58,6 +68,19 @@ class RoomController extends AbstractController
     {
         return $this->render('room/show.html.twig', [
             'room' => $room,
+        ]);
+    }
+
+    /**
+     * @Route("/search/{city}", name="room.showCity", methods={"GET"})
+     */
+    public function showRoomsByCity(RoomRepository $roomRepository, $city): Response
+    {
+        $rooms = $roomRepository->findByCity($city);
+
+        return $this->render('room/showCity.html.twig', [
+            'city' => $city,
+            'rooms' => $rooms
         ]);
     }
 
@@ -98,7 +121,7 @@ class RoomController extends AbstractController
     /**
      * @Route("/category/{id}/showRooms", name="category.showRooms")
      */
-    public function showRoomsByCategory(RoomRepository $roomRepository, Category $category):Response
+    public function showRoomsByCategory(RoomRepository $roomRepository, Category $category): Response
     {
         $rooms = $roomRepository->findRoomByCategory($category);
 
@@ -111,7 +134,7 @@ class RoomController extends AbstractController
     /**
      * @Route("/byUser/{id}", name="room.byUser")
      */
-    public function showRoomsByUser(RoomRepository $roomRepository, User $user):Response
+    public function showRoomsByUser(RoomRepository $roomRepository, User $user): Response
     {
         $rooms = $roomRepository->findRoomByUser($user);
 

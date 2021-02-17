@@ -84,4 +84,14 @@ class RoomRepository extends ServiceEntityRepository
 
         return $query->getQuery()->getResult();
     }
+
+    public function findByCity($city): array
+    {
+        $query = $this->createQueryBuilder('r')
+            ->where('r.city LIKE :city')
+            ->setParameter('city', '%'.$city.'%')
+            ->orderBy('r.city', 'DESC');
+
+        return $query->getQuery()->getResult();
+    }
 }

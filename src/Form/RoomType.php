@@ -42,6 +42,7 @@ class RoomType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Room::class,
+            'translation_domain' => 'room_form'
         ]);
     }
 }
