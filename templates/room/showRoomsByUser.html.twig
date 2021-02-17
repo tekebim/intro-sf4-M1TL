@@ -3,12 +3,49 @@
 {% block title %}Rooms created by user{% endblock %}
 {% block body %}
     <div class="container">
-        <h1>Rooms created by : {{ user.lastname }} - {{ user.firstname }}</h1>
-        <ul>
-            {% for room in rooms %}
-                <li>{{ room.id }} - {{ room.name }}</li>
-            {% endfor %}
-        </ul>
+        <h1 class="text-center m-5">Rooms created by : {{ user.lastname }} {{ user.firstname }}</h1>
+
+        <div class="shadow p-3 mb-5 bg-white rounded">
+            <table class="table table-striped table-sm">
+                <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Capacity</th>
+                    <th>Projector</th>
+                    <th>Internet connexion</th>
+                    <th>Address</th>
+                    <th>Ville</th>
+                    <th>Floor</th>
+                    <th>Available</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for room in rooms %}
+                    <tr>
+                        <td>{{ room.name }}</td>
+                        <td>{{ room.category.name }}</td>
+                        <td>{{ room.capacity }}</td>
+                        <td>{{ room.hasInternet == 1 ? 'yes' : 'no' }}</td>
+                        <td>{{ room.hasInternet == 1 ? 'yes' : 'no' }}</td>
+                        <td>{{ room.address }}</td>
+                        <td>{{ room.city }}</td>
+                        <td>{{ room.floor }}</td>
+                        <td>{{ room.hasInternet == 1 ? 'yes' : 'no' }}</td>
+                        <td>
+                            <a class="btn btn-sm btn-success" href="{{ path('room_show', {'id': room.id}) }}">show</a>
+                            <a class="btn btn-sm btn-primary" href="{{ path('room_edit', {'id': room.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock %}
 
