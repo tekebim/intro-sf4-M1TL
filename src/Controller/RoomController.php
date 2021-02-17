@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Room;
 use App\Form\RoomType;
 use App\Repository\RoomRepository;
@@ -83,12 +84,25 @@ class RoomController extends AbstractController
      */
     public function delete(Request $request, Room $room): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$room->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $room->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($room);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('room_index');
+    }
+
+    /**
+     * @Route("/category/{id}/showRooms", name="category.showRooms")
+     */
+    public function showRoomsByCategory(RoomRepository $roomRepository, Category $category):Response
+    {
+        $rooms = $roomRepository->findRoomByCategory($category);
+
+        return $this->render('room/showCategory.html.twig', [
+            'category' => $category,
+            'rooms' => $rooms
+        ]);
     }
 }
