@@ -9,28 +9,55 @@
     {% endfor %}
 
     <div class="container">
-        <h1>Test</h1>
+        <h1>Rooms index</h1>
 
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Capacity</th>
-                <th scope="col">Cate</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Capacity</th>
+                <th>Projector</th>
+                <th>Internet connexion</th>
+                <th>Address</th>
+                <th>Ville</th>
+                <th>Floor</th>
+                <th>Available</th>
+                <th>Creator</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             {% for room in rooms %}
                 <tr>
-                    <th>{{ room.id }}</th>
-                    <th>{{ room.name }}</th>
-                    <th>{{ room.capacity }}</th>
-                    <th>{{ room.category.name }}</th>
+                    <td>{{ room.id }}</td>
+                    <td>{{ room.name }}</td>
+                    <td>{{ room.category.name }}</td>
+                    <td>{{ room.capacity }}</td>
+                    <td>{{ room.hasInternet == 1 ? 'yes' : 'no' }}</td>
+                    <td>{{ room.hasInternet == 1 ? 'yes' : 'no' }}</td>
+                    <td>{{ room.address }}</td>
+                    <td>{{ room.city }}</td>
+                    <td>{{ room.floor }}</td>
+                    <td>{{ room.hasInternet == 1 ? 'yes' : 'no' }}</td>
+                    <td>{{ room.user.firstname }} {{ room.user.lastname }}</td>
+                    <td>
+                        <a href="{{ path('room_show', {'id': room.id}) }}">show</a>
+                        <a href="{{ path('room_edit', {'id': room.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <a class="btn btn-primary" href="{{ path('room_new') }}">Create new room</a>
+        {% endif %}
     </div>
 
 {% endblock %}

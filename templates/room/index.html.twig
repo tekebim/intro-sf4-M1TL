@@ -4,13 +4,14 @@
 
 {% block body %}
     <div class="container">
-        <h1>Room index</h1>
+        <h1>Rooms index</h1>
 
         <table class="table">
             <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>Category</th>
                 <th>Capacity</th>
                 <th>Projector</th>
                 <th>Internet connexion</th>
@@ -27,6 +28,7 @@
                 <tr>
                     <td>{{ room.id }}</td>
                     <td>{{ room.name }}</td>
+                    <td>{{ room.category.name }}</td>
                     <td>{{ room.capacity }}</td>
                     <td>{{ room.hasInternet == 1 ? 'yes' : 'no' }}</td>
                     <td>{{ room.hasInternet == 1 ? 'yes' : 'no' }}</td>
@@ -34,7 +36,7 @@
                     <td>{{ room.city }}</td>
                     <td>{{ room.floor }}</td>
                     <td>{{ room.hasInternet == 1 ? 'yes' : 'no' }}</td>
-                    <td>{{ room.user.username }}</td>
+                    <td>{{ room.user.firstname }} {{ room.user.lastname }}</td>
                     <td>
                         <a href="{{ path('room_show', {'id': room.id}) }}">show</a>
                         <a href="{{ path('room_edit', {'id': room.id}) }}">edit</a>
@@ -48,6 +50,8 @@
             </tbody>
         </table>
 
-        <a class="btn btn-primary" href="{{ path('room_new') }}">Create new room</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a class="btn btn-primary" href="{{ path('room_new') }}">Create new room</a>
+        {% endif %}
     </div>
 {% endblock %}
