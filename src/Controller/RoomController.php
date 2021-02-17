@@ -34,6 +34,7 @@ class RoomController extends AbstractController
     {
         $room = new Room();
         $form = $this->createForm(RoomType::class, $room);
+        $room->setUser($this->getUser());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
