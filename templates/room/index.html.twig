@@ -11,7 +11,13 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Capacity</th>
-                <th>actions</th>
+                <th>Projector</th>
+                <th>Internet connexion</th>
+                <th>Address</th>
+                <th>Ville</th>
+                <th>Floor</th>
+                <th>Available</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +26,12 @@
                 <td>{{ room.id }}</td>
                 <td>{{ room.name }}</td>
                 <td>{{ room.capacity }}</td>
+                <td>{{ room.hasProjector }}</td>
+                <td>{{ room.hasInternet }}</td>
+                <td>{{ room.address }}</td>
+                <td>{{ room.city }}</td>
+                <td>{{ room.floor }}</td>
+                <td>{{ room.isAvailable }}</td>
                 <td>
                     <a href="{{ path('room_show', {'id': room.id}) }}">show</a>
                     <a href="{{ path('room_edit', {'id': room.id}) }}">edit</a>

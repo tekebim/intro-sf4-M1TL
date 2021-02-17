@@ -33,6 +33,36 @@ class Room
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $floor;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $has_projector = false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_available;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $has_internet;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $address;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +99,78 @@ class Room
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getFloor(): ?int
+    {
+        return $this->floor;
+    }
+
+    public function setFloor(int $floor): self
+    {
+        $this->floor = $floor;
+
+        return $this;
+    }
+
+    public function getHasProjector(): ?bool
+    {
+        return $this->has_projector;
+    }
+
+    public function setHasProjector(bool $has_projector): self
+    {
+        $this->has_projector = $has_projector;
+
+        return $this;
+    }
+
+    public function getIsAvailable(): ?bool
+    {
+        return $this->is_available;
+    }
+
+    public function setIsAvailable(bool $is_available): self
+    {
+        $this->is_available = $is_available;
+
+        return $this;
+    }
+
+    public function getHasInternet(): ?bool
+    {
+        return $this->has_internet;
+    }
+
+    public function setHasInternet(bool $has_internet): self
+    {
+        $this->has_internet = $has_internet;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }
