@@ -18,8 +18,57 @@
                     <td>{{ room.name }}</td>
                 </tr>
                 <tr>
+                    <th>Category</th>
+                    <td>{{ room.category.name }}</td>
+                </tr>
+                <tr>
                     <th>Capacity</th>
                     <td>{{ room.capacity }}</td>
+                </tr>
+                <tr>
+                    <th>Has projector</th>
+                    <td>
+                        {% if(room.hasProjector == 1) %}
+                            <img src="{{ asset("images/check.svg") }}" width="15" alt="yes">
+                        {% else %}
+                            <img src="{{ asset("images/close.svg") }}" width="15" alt="no">
+                        {% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Has internet</th>
+                    <td>
+                        {% if(room.hasInternet == 1) %}
+                            <img src="{{ asset("images/check.svg") }}" width="15" alt="yes">
+                        {% else %}
+                            <img src="{{ asset("images/close.svg") }}" width="15" alt="no">
+                        {% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>{{ room.address }}</td>
+                </tr>
+                <tr>
+                    <th>City</th>
+                    <td>{{ room.city }}</td>
+                </tr>
+                <tr>
+                    <th>Floor</th>
+                    <td>{{ room.floor }}</td>
+                </tr>
+                <tr>
+                    <th>Is available</th>
+                    <td>
+                        {% if(room.isAvailable == 1) %}
+                            <img src="{{ asset("images/check.svg") }}" width="15" alt="yes">
+                        {% else %}
+                            <img src="{{ asset("images/close.svg") }}" width="15" alt="no">
+                        {% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Creator</th>
+                    <td>
+                        <a href="{{ path('room.byUser', {'id': room.user.id}) }}">{{ room.user.firstname }} {{ room.user.lastname }}</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -31,8 +80,8 @@
             </div>
         </div>
 
-        <div class="text-center">
-            <a class="m-3" href="{{ path('room_index') }}"><< Back to list</a>
+        <div class="text-center m-5">
+            <a href="{{ path('room_index') }}"><< Back to list</a>
         </div>
     </div>
 {% endblock %}

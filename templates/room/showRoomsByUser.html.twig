@@ -24,18 +24,38 @@
                 <tbody>
                 {% for room in rooms %}
                     <tr>
-                        <td>{{ room.name }}</td>
+                        <td><strong>{{ room.name }}</strong></td>
                         <td>{{ room.category.name }}</td>
                         <td>{{ room.capacity }}</td>
-                        <td>{{ room.hasInternet == 1 ? 'yes' : 'no' }}</td>
-                        <td>{{ room.hasInternet == 1 ? 'yes' : 'no' }}</td>
+                        <td>
+                            {% if(room.hasProjector == 1) %}
+                                <img src="{{ asset("images/check.svg") }}" width="15" alt="yes">
+                            {% else %}
+                                <img src="{{ asset("images/close.svg") }}" width="15" alt="no">
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if(room.hasInternet == 1) %}
+                                <img src="{{ asset("images/check.svg") }}" width="15" alt="yes">
+                            {% else %}
+                                <img src="{{ asset("images/close.svg") }}" width="15" alt="no">
+                            {% endif %}
+                        </td>
                         <td>{{ room.address }}</td>
                         <td>{{ room.city }}</td>
                         <td>{{ room.floor }}</td>
-                        <td>{{ room.hasInternet == 1 ? 'yes' : 'no' }}</td>
                         <td>
-                            <a class="btn btn-sm btn-success" href="{{ path('room_show', {'id': room.id}) }}">show</a>
-                            <a class="btn btn-sm btn-primary" href="{{ path('room_edit', {'id': room.id}) }}">edit</a>
+                            {% if(room.isAvailable == 1) %}
+                                <img src="{{ asset("images/check.svg") }}" width="15" alt="yes">
+                            {% else %}
+                                <img src="{{ asset("images/close.svg") }}" width="15" alt="no">
+                            {% endif %}
+                        </td>
+                        <td width="100">
+                            <a class="btn btn-sm btn-primary" href="{{ path('room_show', {'id': room.id}) }}"><img
+                                        src="{{ asset('images/icon-view.png') }}" width="16" alt="view"></a>
+                            <a class="btn btn-sm btn-dark" href="{{ path('room_edit', {'id': room.id}) }}"><img
+                                        src="{{ asset('images/icon-edit.png') }}" width="16" alt="edit"></a>
                         </td>
                     </tr>
                 {% else %}
