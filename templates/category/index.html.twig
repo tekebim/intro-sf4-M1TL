@@ -15,7 +15,9 @@
             <tr>
                 <th>#</th>
                 <th>Nom</th>
+                {% if is_granted('ROLE_ADMIN') %}
                 <th colspan="2">Actions</th>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -23,24 +25,28 @@
                 <tr>
                     <td>{{ category.id }}</td>
                     <td>{{ category.name }}</td>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <td>
-                        <a href="{{ path('category.edit', {id:category.id}) }}" class="btn btn-primary">Editer</a>
+                        <a href="{{ path('category.edit', {id:category.id}) }}" class="btn btn-primary">Edit</a>
                         <form method="post" action="{{ path('category.delete', {id:category.id}) }}"
                               onsubmit="confirm('Etes-vous sûr ? Cette action est irréversible')">
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete'~category.id) }}">
-                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>
 
         </table>
 
+        {% if is_granted('ROLE_ADMIN') %}
         <div class="text-center">
-            <a class="btn btn-primary" href="{{ path('category.add') }}">Ajouter</a>
+            <a class="btn btn-primary" href="{{ path('category.add') }}">Add a new category</a>
         </div>
+        {% endif %}
 
     </div>
 {% endblock %}

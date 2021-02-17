@@ -36,5 +36,7 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/room/new, roles: ROLE_ADMIN }
+        - { path: ^/room/\d+/edit, roles: ROLE_ADMIN }
         - { path: ^/category/add, roles: ROLE_ADMIN }
+        - { path: ^/category/\d+/edit, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
