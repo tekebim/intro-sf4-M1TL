@@ -28,6 +28,8 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('age', IntegerType::class)
+            ->add('lastname', TextType::class)
+            ->add('firstname', TextType::class)
             ->add('country', CountryType::class)
             ->add('website_url', TextType::class)
             ->add('city', TextType::class, [
