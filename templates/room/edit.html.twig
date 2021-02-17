@@ -3,11 +3,17 @@
 {% block title %}Edit Room{% endblock %}
 
 {% block body %}
-    <h1>Edit Room</h1>
 
-    {{ include('room/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="container">
+        <h1 class="text-center m-5">Edit Room</h1>
 
-    <a href="{{ path('room_index') }}">back to list</a>
+        <div class="shadow p-3 mb-5 bg-white rounded">
+            {{ include('room/_form.html.twig', {'button_label': 'Update'}) }}
+            {{ include('room/_delete_form.html.twig') }}
+        </div>
 
-    {{ include('room/_delete_form.html.twig') }}
+        <div class="text-center">
+            <a class="" href="{{ path('room_index') }}"><< Back to list</a>
+        </div>
+    </div>
 {% endblock %}
