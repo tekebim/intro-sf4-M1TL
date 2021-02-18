@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Room;
 use App\Entity\User;
 use App\Form\RoomType;
+use App\Manager\EmailManager;
 use App\Repository\RoomRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,7 +40,7 @@ class RoomController extends AbstractController
     /**
      * @Route("/new", name="room_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, EmailManager $mailer): Response
     {
         $room = new Room();
         $form = $this->createForm(RoomType::class, $room);
@@ -51,6 +52,7 @@ class RoomController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($room);
             $entityManager->flush();
+            $mailer->sendMailAdmin($room);
 
             return $this->redirectToRoute('room_index');
         }
